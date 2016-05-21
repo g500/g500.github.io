@@ -2,7 +2,7 @@
 layout:     post
 title:      "平时用的一些命令"
 subtitle:   "这个只是一些平时用的一些命令，最好别看，一般人看不懂的！"
-date:       2015-05-20 12:00:00
+date:       2016-05-20 12:00:00
 author:     "liwei"
 catalog: true
 header-img: "img/post-bg-2015.jpg"

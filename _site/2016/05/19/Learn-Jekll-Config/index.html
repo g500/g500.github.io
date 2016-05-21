@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="写写代码的地方">
     <meta name="keyword"  content="emacs vi golang c python">
     <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="/js/styles/atelier-dune-light.css">
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script> 
 
     <title>jeklly配置学习 - 李伟的博客 | Liwei</title>
 
@@ -74,11 +77,7 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/portfolio/">Portfolio</a>
+                        <a href="/About/">About</a>
                     </li>
                     
                     <li>
@@ -220,6 +219,9 @@
   <li>catalog功能需要加上，也就是页面的导航功能需要加上</li>
   <li>很多需要去掉的没有多大意义的功能。比如微博之类的</li>
   <li>图片换掉</li>
+  <li>将highlight里面的js与css替换过去。完成代码的着色功能。</li>
+  <li>有些line-height和padding需要手动调整成自己喜欢的间距。比如1.75em我比较喜欢。</li>
+  <li>在写title的时候一定要注意冒号与内容之间留点间隔，不然有时候会出问题。我也不知道为什么。理论上应该是与utf8有关系。</li>
 </ol>
 
 <p>写tags的方法：</p>
@@ -231,6 +233,16 @@
 
 <p>像上面这样就可以。</p>
 
+<p>在本地查看博客的代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 在本地启动博客</span>
+jekyll serve --watch
+
+<span class="c"># 这时候会在根目录下面的_site生成所有的内容。</span>
+tree _site
+</code></pre>
+</div>
+
 <p>By <em>Liwei</em> 160519</p>
 
 
@@ -241,13 +253,13 @@
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2015/05/20/Notes-Go-Ethereum/" data-toggle="tooltip" data-placement="top" title="平时用的一些命令">
-                        Previous<br>
+                    
+                    <li class="next">
+                        <a href="/2016/05/20/Notes-Go-Ethereum/" data-toggle="tooltip" data-placement="top" title="平时用的一些命令">
+                        Next<br>
                         <span>平时用的一些命令</span>
                         </a>
                     </li>
-                    
                     
                 </ul>
 
@@ -291,6 +303,12 @@
                             
                 				<a href="/tags/#生活" title="生活" rel="2">
                                     生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Go" title="Go" rel="2">
+                                    Go
                                 </a>
                             
         				
@@ -381,12 +399,7 @@
                 <p class="copyright text-muted">
                     Copyright &copy; Liwei 2016
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
+                    Theme by <a href="http://g500.github.io">Bootstrap</a> 
                 </p>
             </div>
         </div>

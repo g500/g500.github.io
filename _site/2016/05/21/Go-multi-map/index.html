@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="写写代码的地方">
+    <meta name="keyword"  content="emacs vi golang c python">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="/js/styles/atelier-dune-light.css">
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script> 
+
+    <title> Go对多维map的初始化 - 李伟的博客 | Liwei</title>
+
+    <link rel="canonical" href="http://g500.github.io/2016/05/21/Go-multi-map/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Liwei</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/About/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2015.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Go" title="Go">Go</a>
+                        
+                    </div>
+                    <h1> Go对多维map的初始化</h1>
+                    
+                    
+                    <h2 class="subheading">主要对多维map的操作,这里有些坑等着人们跳下去! </h2>
+                    
+                    <span class="meta">Posted by liwei on May 21, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<ul>
+  <li><a href="http://tnt.wicast.tk/2015/11/02/golang-multiple-dimension-map/">来自这里</a></li>
+</ul>
+
+<h2 id="map">什么是 map</h2>
+<p>首先 Golang 中的 map 与 JS，Py 里的 Map 函数并不是同一回事。
+前者是 Golang 中的一种基础数据类型，具有 <em>Key:Value</em> 的特性；
+而后者的 Map 是 MapReduce 中的那个 Map，把一组数据分发到其他地方.</p>
+
+<h2 id="map-map-">使用 map，以及多维 map 的坑</h2>
+
+<p>map 的底层就是一个 hash，平时咱喜欢利用这一点来给一组数据去除重复. 
+使用 map 的时候需要注意，你需要显式地初始化才能对 map 进行操作.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">var</span><span class="x"> </span><span class="n">m</span><span class="x"> </span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="x">
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="s">"sssss"</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>上面的代码会报 <strong>panic: assignment to entry in nil map</strong>  ，必须用内建的 <strong>make()</strong> 函数才行.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">m</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span><span class="x">
+
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="s">"sssss"</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>咱在自己的项目里用到了一个二维 map，结果第一遍写的时候就碰到了那个 nil map 的问题。
+一开始的代码是这样的：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">m</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span><span class="x">
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">][</span><span class="s">"b"</span><span class="p">]</span><span class="o">=</span><span class="s">"ccc"</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>后来才想明白如果插新加入的元素也是个 map 的话需要再次 make()!! 修正后的代码如下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">m</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="n">c</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="n">c</span><span class="p">[</span><span class="s">"b"</span><span class="p">]</span><span class="o">=</span><span class="m">1</span><span class="x">
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>这时的 m[“a”] 的值就是另一个 map 了.</p>
+
+<p>多维度 Map 的数据存取
+一维情况下的 map 做存取很简单，而二维以上的情况就得小心了. 先来看一个例子：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">m</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="n">c</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="n">c</span><span class="p">[</span><span class="s">"b"</span><span class="p">]</span><span class="o">=</span><span class="m">1</span><span class="x">
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="x">
+</span><span class="n">d</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="n">d</span><span class="p">[</span><span class="s">"c"</span><span class="p">]</span><span class="o">=</span><span class="m">2</span><span class="x">
+</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>而这个时候再去查询 m[“a”][“b”] 会发现这个值已经没有了，取而代之的是 m[“a”][“c”].
+这是因为 b 和 c 都是 map[string]int 类型的数据，Golang 直接把 [“a”] 里的数据从 b 替换成了 c，而不会递归地添加 map 中缺失的数据。
+要在 m 中保留 [“a”][“b”] 和 [“a”][“c”]，需要一些额外的判断才行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="x"> </span><span class="n">_</span><span class="p">,</span><span class="n">exist</span><span class="o">:=</span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">];</span><span class="n">exist</span><span class="p">{</span><span class="x">
+    </span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">][</span><span class="s">"c"</span><span class="p">]</span><span class="o">=</span><span class="m">2</span><span class="x">
+</span><span class="p">}</span><span class="k">else</span><span class="p">{</span><span class="x">
+    </span><span class="n">c</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="x">
+    </span><span class="n">c</span><span class="p">[</span><span class="s">"c"</span><span class="p">]</span><span class="o">=</span><span class="m">2</span><span class="x">
+    </span><span class="n">m</span><span class="p">[</span><span class="s">"a"</span><span class="p">]</span><span class="o">=</span><span class="n">c</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>换句话说，每次创建一个一维 map 都要 make() 一次，不然就会 panic. 多维 map 没加一层都要多 make() 好几次.</p>
+
+
+
+                <hr>
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/05/21/Go-Mgo-Reg/" data-toggle="tooltip" data-placement="top" title=" Go在Mgo里面模糊查询 ">
+                        Previous<br>
+                        <span> Go在Mgo里面模糊查询 </span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+                				<a href="/tags/#生活" title="生活" rel="2">
+                                    生活
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Go" title="Go" rel="2">
+                                    Go
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="http://g500.github.io/">liwei</a></li>
+                    
+                        <li><a href="http://g500.github.io/">liwei</a></li>
+                    
+                        <li><a href="http://g500.github.io/">liwei</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by Hux, add target = "_blank" to <a> by Hux -->
+                    
+                    
+
+
+                    
+                    
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Liwei 2016
+                    <br>
+                    Theme by <a href="http://g500.github.io">Bootstrap</a> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

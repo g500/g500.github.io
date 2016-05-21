@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="写写代码的地方">
     <meta name="keyword"  content="emacs vi golang c python">
     <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="/js/styles/atelier-dune-light.css">
+    <script src="/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script> 
 
     <title>李伟的博客 | Liwei</title>
 
@@ -74,11 +77,7 @@
                     </li>
                     
                     <li>
-                        <a href="/about/">About</a>
-                    </li>
-                    
-                    <li>
-                        <a href="/portfolio/">Portfolio</a>
+                        <a href="/About/">About</a>
                     </li>
                     
                     <li>
@@ -177,42 +176,63 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2016/05/19/Learn-Jekll-Config/">
+    <a href="/2016/05/21/Go-multi-map/">
         <h2 class="post-title">
-            jeklly配置学习
+             Go对多维map的初始化
         </h2>
         
         <h3 class="post-subtitle">
-            很早之前就在用，最近又开始整理了！
+            主要对多维map的操作,这里有些坑等着人们跳下去! 
         </h3>
         
         <div class="post-content-preview">
-            从网上找到资料整理
-
-借用的博客
-
-遇到的问题
-
-如何在一台电脑上登陆2个github帐号的问题。
-
-如何本地访问的问题。
-
-使用Jekyll版本作为博客模板，仅需如下几步：
+            
+  来自这里
 
 
-  首先Fork或Download一份本项目代码。
-  修改_config.yaml及about.md文件，以变更个人信息。
-  修改_include目录下相关文件，以配置网站统计(analytics.html)，...
+什么是 map
+首先 Golang 中的 map 与 JS，Py 里的 Map 函数并不是同一回事。
+前者是 Golang 中的一种基础数据类型，具有 Key:Value 的特性；
+而后者的 Map 是 MapReduce 中的那个 Map，把一组数据分发到其他地方.
+
+使用 map，以及多维 map 的坑
+
+map 的底层就是一个 hash，平时咱喜欢利用这一点来给一组...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Liwei on May 19, 2016
+        Posted by liwei on May 21, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2015/05/20/Notes-Go-Ethereum/">
+    <a href="/2016/05/21/Go-Mgo-Reg/">
+        <h2 class="post-title">
+             Go在Mgo里面模糊查询 
+        </h2>
+        
+        <h3 class="post-subtitle">
+             Mgo的模糊查询 
+        </h3>
+        
+        <div class="post-content-preview">
+            //模糊查询方式：
+c.Find(bson.M{"title": bson.RegEx{key,"."}})…
+
+
+
+
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by liwei on May 21, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/20/Notes-Go-Ethereum/">
         <h2 class="post-title">
             平时用的一些命令
         </h2>
@@ -232,13 +252,22 @@ web3.fro...
         </div>
     </a>
     <p class="post-meta">
-        Posted by liwei on May 20, 2015
+        Posted by liwei on May 20, 2016
     </p>
 </div>
 <hr>
 
 
 <!-- Pager -->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page2">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
 
 
     		</div>
@@ -263,6 +292,12 @@ web3.fro...
                                 </a>
                             
                         
+                            
+                                <a href="/tags/#Go" title="Go" rel="2">
+                                    Go
+                                </a>
+                            
+                        
                     </div>
                 </section>
                 
@@ -275,7 +310,7 @@ web3.fro...
                             <img src="/img/me400x400.jpg" />
                         
                         
-                            <p>写写代码，做做设计，看看产品。世界那么大，我想去看看。</p>
+                            <p>写写代码，到处走走，世界那么大，我想去看看。希望能平平淡淡无忧无虑到老!</p>
                         
                         <!-- SNS Link -->
                         <ul class="list-inline">
@@ -330,12 +365,7 @@ web3.fro...
                 <p class="copyright text-muted">
                     Copyright &copy; Liwei 2016
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=huxpro&repo=huxpro.github.io&type=star&count=true" >
-                    </iframe>
+                    Theme by <a href="http://g500.github.io">Bootstrap</a> 
                 </p>
             </div>
         </div>
