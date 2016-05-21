@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Liwei</title>
+    <description>写写代码的地方</description>
+    <link>http://g500.github.io/</link>
+    <atom:link href="http://g500.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 21 May 2016 20:23:18 +0800</pubDate>
+    <lastBuildDate>Sat, 21 May 2016 20:23:18 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>jeklly配置学习</title>
+        <description>&lt;h2 id=&quot;section&quot;&gt;从网上找到资料整理&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://azeril.me/blog/Build-Your-First-GitHub-Pages-Blog.html&quot;&gt;借用的博客&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;遇到的问题&lt;/h2&gt;
+
+&lt;p&gt;如何在一台电脑上登陆2个github帐号的问题。&lt;/p&gt;
+
+&lt;p&gt;如何本地访问的问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;jekyll&quot;&gt;使用Jekyll版本作为博客模板，仅需如下几步：&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;首先Fork或Download一份本项目代码。&lt;/li&gt;
+  &lt;li&gt;修改_config.yaml及about.md文件，以变更个人信息。&lt;/li&gt;
+  &lt;li&gt;修改_include目录下相关文件，以配置网站统计(analytics.html)，网友评论(comment.html)，右侧栏目(categories.html),热门文章(hot.html),友情链接(links.html)等。&lt;/li&gt;
+  &lt;li&gt;修改CNAME文件，以绑定自己的域名。&lt;/li&gt;
+  &lt;li&gt;删除_posts下文章，换成你自己的。&lt;/li&gt;
+  &lt;li&gt;去谷歌自定义搜索新建一个你的搜索引擎，把你的Id替换根目录下search.html我的ID&lt;/li&gt;
+  &lt;li&gt;最后，push到你自己的博客Repo~&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;博客需要定制的功能&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;catalog功能需要加上，也就是页面的导航功能需要加上&lt;/li&gt;
+  &lt;li&gt;很多需要去掉的没有多大意义的功能。比如微博之类的&lt;/li&gt;
+  &lt;li&gt;图片换掉&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;写tags的方法：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tags:
+    - 生活
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;像上面这样就可以。&lt;/p&gt;
+
+&lt;p&gt;By &lt;em&gt;Liwei&lt;/em&gt; 160519&lt;/p&gt;
+</description>
+        <pubDate>Thu, 19 May 2016 20:00:00 +0800</pubDate>
+        <link>http://g500.github.io/2016/05/19/Learn-Jekll-Config/</link>
+        <guid isPermaLink="true">http://g500.github.io/2016/05/19/Learn-Jekll-Config/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>平时用的一些命令</title>
+        <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;$set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;walletsum&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}},&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;web3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;695&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;web3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getTransactionReceipt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0xe5826cf6d5dd5ef6b8166a02dd1943f47aa36866c10cd8ffca2cc044d88eacd4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;web3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fromWei&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;web3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getBalance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0xae069eda080a3a67d91fc7e3e2c793cf162c5c60&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;finney&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 查看ipc调用的个数&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;lsof&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ipc&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 20 May 2015 20:00:00 +0800</pubDate>
+        <link>http://g500.github.io/2015/05/20/Notes-Go-Ethereum/</link>
+        <guid isPermaLink="true">http://g500.github.io/2015/05/20/Notes-Go-Ethereum/</guid>
+        
+        <category>生活</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
