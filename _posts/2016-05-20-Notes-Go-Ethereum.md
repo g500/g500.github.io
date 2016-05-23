@@ -11,8 +11,10 @@ tags:
 ---
 
 ```js
+// 更新数据库字段
 db.users.update({}, {$set:{'walletsum':0}}, true, true)
 
+// 获取块信息
 web3.eth.getBlock(695, true)
 
 web3.eth.getTransactionReceipt("0xe5826cf6d5dd5ef6b8166a02dd1943f47aa36866c10cd8ffca2cc044d88eacd4")

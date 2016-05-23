@@ -192,8 +192,10 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span><span class="na">$set</span><span class="p">:{</span><span class="s1">'walletsum'</span><span class="p">:</span><span class="mi">0</span><span class="p">}},</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+				<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 更新数据库字段</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span><span class="na">$set</span><span class="p">:{</span><span class="s1">'walletsum'</span><span class="p">:</span><span class="mi">0</span><span class="p">}},</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
 
+<span class="c1">// 获取块信息</span>
 <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBlock</span><span class="p">(</span><span class="mi">695</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
 
 <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getTransactionReceipt</span><span class="p">(</span><span class="s2">"0xe5826cf6d5dd5ef6b8166a02dd1943f47aa36866c10cd8ffca2cc044d88eacd4"</span><span class="p">)</span>
