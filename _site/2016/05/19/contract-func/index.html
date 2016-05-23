@@ -15,7 +15,7 @@
 
     <title>jeklly配置学习 - 李伟的博客 | Liwei</title>
 
-    <link rel="canonical" href="http://g500.github.io/2016/05/19/Learn-Jekll-Config/">
+    <link rel="canonical" href="http://g500.github.io/2016/05/19/contract-func/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -192,58 +192,78 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h2 id="section">从网上找到资料整理</h2>
-
-<p><a href="http://azeril.me/blog/Build-Your-First-GitHub-Pages-Blog.html">借用的博客</a></p>
-
-<h2 id="section-1">遇到的问题</h2>
-
-<p>如何在一台电脑上登陆2个github帐号的问题。</p>
-
-<p>如何本地访问的问题。</p>
-
-<h2 id="jekyll">使用Jekyll版本作为博客模板，仅需如下几步：</h2>
-
-<ol>
-  <li>首先Fork或Download一份本项目代码。</li>
-  <li>修改_config.yaml及about.md文件，以变更个人信息。</li>
-  <li>修改_include目录下相关文件，以配置网站统计(analytics.html)，网友评论(comment.html)，右侧栏目(categories.html),热门文章(hot.html),友情链接(links.html)等。</li>
-  <li>修改CNAME文件，以绑定自己的域名。</li>
-  <li>删除_posts下文章，换成你自己的。</li>
-  <li>去谷歌自定义搜索新建一个你的搜索引擎，把你的Id替换根目录下search.html我的ID</li>
-  <li>最后，push到你自己的博客Repo~</li>
-</ol>
-
-<h2 id="section-2">博客需要定制的功能</h2>
-<ol>
-  <li>catalog功能需要加上，也就是页面的导航功能需要加上</li>
-  <li>很多需要去掉的没有多大意义的功能。比如微博之类的</li>
-  <li>图片换掉</li>
-  <li>将 <strong>highlight</strong> 里面的js与css替换过去。完成代码的着色功能。</li>
-  <li>有些 <em>line-height</em> 和 <em>padding</em> 需要手动调整成自己喜欢的间距。比如 ~1.75em~ 我比较喜欢。</li>
-  <li>在写title的时候一定要注意冒号与内容之间留点间隔，不然有时候会出问题。我也不知道为什么。理论上应该是与utf8有关系。</li>
-</ol>
-
-<p>写tags的方法：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>tags:
-    - 生活
+				<div class="highlighter-rouge"><pre class="highlight"><code>---
+layout     : post
+title      : <span class="s2">" contract有关的备忘 "</span>
+subtitle   : <span class="s2">" 之前有关的合约语法没有做好记录 "</span>
+date       : 2016-05-23 12:00:00
+author     : <span class="s2">"liwei"</span>
+catalog    : <span class="nb">true
+</span>header-img : <span class="s2">"img/post-bg-2015.jpg"</span>
+tags       :
+    - Go
+---
 </code></pre>
 </div>
 
-<p>像上面这样就可以。</p>
+<h2 id="website">有关的website</h2>
 
-<p>在本地查看博客的代码：</p>
+<ul>
+  <li><a href="https://ethereum.github.io/browser-solidity/#version=soljson-latest.js">编辑器</a></li>
+  <li><a href="http://solidity.readthedocs.io/en/latest/">solidity官网</a></li>
+</ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># 在本地启动博客</span>
-jekyll serve --watch
+<h2 id="section">简单存储</h2>
 
-<span class="c"># 这时候会在根目录下面的_site生成所有的内容。</span>
-tree _site
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="c1">// 存储</span>
+<span class="nx">contract</span> <span class="nx">SimpleStorage</span> <span class="p">{</span>
+    <span class="nx">uint</span> <span class="nx">storedData</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">set</span><span class="p">(</span><span class="nx">uint</span> <span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">storedData</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">get</span><span class="p">()</span> <span class="nx">constant</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint</span> <span class="nx">retVal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">storedData</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
-<p>By <em>Liwei</em> 160519</p>
+<ul>
+  <li>跟很多其他语言一样，访问状态变量时，不需要在前面增加 <strong>this</strong> . 这样的前缀。</li>
+</ul>
+
+<h2 id="section-1">代币</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">contract</span> <span class="nx">Coin</span> <span class="p">{</span>
+<span class="c1">//关键字“public”使变量能从合约外部访问。</span>
+    <span class="nx">address</span> <span class="kr">public</span> <span class="nx">minter</span><span class="p">;</span>
+    <span class="nx">mapping</span> <span class="p">(</span><span class="nx">address</span> <span class="o">=&gt;</span> <span class="nx">uint</span><span class="p">)</span> <span class="kr">public</span> <span class="nx">balances</span><span class="p">;</span>
+
+<span class="c1">//事件让轻客户端能高效的对变化做出反应。</span>
+    <span class="nx">event</span> <span class="nx">Sent</span><span class="p">(</span><span class="nx">address</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">address</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">uint</span> <span class="nx">amount</span><span class="p">);</span>
+
+<span class="c1">//这个构造函数的代码仅仅只在合约创建的时候被运行。</span>
+    <span class="kd">function</span> <span class="nx">Coin</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">minter</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">mint</span><span class="p">(</span><span class="nx">address</span> <span class="nx">receiver</span><span class="p">,</span> <span class="nx">uint</span> <span class="nx">amount</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span> <span class="o">!=</span> <span class="nx">minter</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="nx">balances</span><span class="p">[</span><span class="nx">receiver</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">amount</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">function</span> <span class="nx">send</span><span class="p">(</span><span class="nx">address</span> <span class="nx">receiver</span><span class="p">,</span> <span class="nx">uint</span> <span class="nx">amount</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">amount</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="nx">balances</span><span class="p">[</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">]</span> <span class="o">-=</span> <span class="nx">amount</span><span class="p">;</span>
+        <span class="nx">balances</span><span class="p">[</span><span class="nx">receiver</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">amount</span><span class="p">;</span>
+        <span class="nx">Sent</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="nx">receiver</span><span class="p">,</span> <span class="nx">amount</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>By <em>Liwei</em> 20160523</p>
 
 
                 <hr>
@@ -252,6 +272,13 @@ tree _site
 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/05/19/Learn-Jekll-Config/" data-toggle="tooltip" data-placement="top" title="jeklly配置学习">
+                        Previous<br>
+                        <span>jeklly配置学习</span>
+                        </a>
+                    </li>
                     
                     
                     <li class="next">
@@ -301,7 +328,7 @@ tree _site
                     <div class="tags">
         				
                             
-                				<a href="/tags/#生活" title="生活" rel="2">
+                				<a href="/tags/#生活" title="生活" rel="3">
                                     生活
                                 </a>
                             

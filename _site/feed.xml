@@ -5,8 +5,8 @@
     <description>写写代码的地方</description>
     <link>http://g500.github.io/</link>
     <atom:link href="http://g500.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 22 May 2016 10:15:31 +0800</pubDate>
-    <lastBuildDate>Sun, 22 May 2016 10:15:31 +0800</lastBuildDate>
+    <pubDate>Mon, 23 May 2016 16:40:31 +0800</pubDate>
+    <lastBuildDate>Mon, 23 May 2016 16:40:31 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -169,8 +169,8 @@
   &lt;li&gt;catalog功能需要加上，也就是页面的导航功能需要加上&lt;/li&gt;
   &lt;li&gt;很多需要去掉的没有多大意义的功能。比如微博之类的&lt;/li&gt;
   &lt;li&gt;图片换掉&lt;/li&gt;
-  &lt;li&gt;将highlight里面的js与css替换过去。完成代码的着色功能。&lt;/li&gt;
-  &lt;li&gt;有些line-height和padding需要手动调整成自己喜欢的间距。比如1.75em我比较喜欢。&lt;/li&gt;
+  &lt;li&gt;将 &lt;strong&gt;highlight&lt;/strong&gt; 里面的js与css替换过去。完成代码的着色功能。&lt;/li&gt;
+  &lt;li&gt;有些 &lt;em&gt;line-height&lt;/em&gt; 和 &lt;em&gt;padding&lt;/em&gt; 需要手动调整成自己喜欢的间距。比如 ~1.75em~ 我比较喜欢。&lt;/li&gt;
   &lt;li&gt;在写title的时候一定要注意冒号与内容之间留点间隔，不然有时候会出问题。我也不知道为什么。理论上应该是与utf8有关系。&lt;/li&gt;
 &lt;/ol&gt;
 
