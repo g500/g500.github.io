@@ -15,7 +15,7 @@
 
     <title>李伟的博客 | Liwei</title>
 
-    <link rel="canonical" href="http://g500.github.io/">
+    <link rel="canonical" href="http://g500.github.io/page3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -176,101 +176,83 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2016/05/25/solidity-mapping/">
+    <a href="/2016/05/21/Go-multi-map/">
         <h2 class="post-title">
-            mapping
+             Go对多维map的初始化
         </h2>
         
         <h3 class="post-subtitle">
-            solidity里面有关mapping的坑
+            主要对多维map的操作,这里有些坑等着人们跳下去! 
         </h3>
         
         <div class="post-content-preview">
-            有关的website
+            
+  来自这里
 
 
-  有关mapping的length问题，或者查找所有数据问题
+什么是 map
+首先 Golang 中的 map 与 JS，Py 里的 Map 函数并不是同一回事。
+前者是 Golang 中的一种基础数据类型，具有 Key:Value 的特性；
+而后者的 Map 是 MapReduce 中的那个 Map，把一组数据分发到其他地方.
 
+使用 map，以及多维 map 的坑
 
-简单存储
-
-About address(0x0)
-当在比较0地址时，由于solidity是静态类型的，所以必须对其进行 address(0x0) 转换才可以进行比较
-The entire storage space is virtually initialized to 0. There is no...
+map 的底层就是一个 hash，平时咱喜欢利用这一点来给一组...
         </div>
     </a>
     <p class="post-meta">
-        Posted by liwei on May 25, 2016
+        Posted by liwei on May 21, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/05/24/contract-auction/">
+    <a href="/2016/05/21/Go-Mgo-Reg/">
         <h2 class="post-title">
-            Auction 拍卖合约
+             Go在Mgo里面模糊查询 
         </h2>
         
         <h3 class="post-subtitle">
-            一个简单的拍卖合约
+             Mgo的模糊查询 
         </h3>
         
         <div class="post-content-preview">
-            有关的website
+            //模糊查询方式：
+c.Find(bson.M{"title": bson.RegEx{key,"."}})…
 
 
-  solidity auction
 
 
-知识点
-
-  now 是一个神奇变量
-  三个反斜杠不知道有没有作用
-  里面的逻辑，虽然简单，但是设计得还是很巧妙的
-  mapping(address =&gt; Bid[]) public bids; 这个是map里面嵌套了一个array的方式，这个功能很好用。 下面的push的方法
-
-
-function bid(by...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Liwei on May 24, 2016
+        Posted by liwei on May 21, 2016
     </p>
 </div>
 <hr>
 
 <div class="post-preview">
-    <a href="/2016/05/24/bet/">
+    <a href="/2016/05/20/Notes-Go-Ethereum/">
         <h2 class="post-title">
-            彩票合约
+            平时用的一些命令
         </h2>
         
         <h3 class="post-subtitle">
-            彩票合约相关的一些开发备忘
+            这个只是一些平时用的一些命令，最好别看，一般人看不懂的！
         </h3>
         
         <div class="post-content-preview">
-            参考
+            // 更新数据库字段
+db.users.update({}, {$set:{'walletsum':0}}, true, true)
 
+// 获取块信息
+web3.eth.getBlock(695, true)
 
-contract Bet {
-  address owner; 
-
-  // every vote info
-  struct Betinfo {
-    address addr;
-    bytes32 choice;
-  }
-
-  // all voted info
-  Betinfo[] public bts;
-  uint public length;
-
-  functi...
+web3.eth.getTransactionReceipt("0xe5826cf6d5dd5ef6b8166a02dd1943f47aa36866c10cd8ffca2cc044...
         </div>
     </a>
     <p class="post-meta">
-        Posted by liwei on May 24, 2016
+        Posted by liwei on May 20, 2016
     </p>
 </div>
 <hr>
@@ -280,9 +262,13 @@ contract Bet {
 
 <ul class="pager">
     
+    <li class="previous">
+        <a href="/page2">&larr; Newer Posts</a>
+    </li>
+    
     
     <li class="next">
-        <a href="/page2">Older Posts &rarr;</a>
+        <a href="/page4">Older Posts &rarr;</a>
     </li>
     
 </ul>

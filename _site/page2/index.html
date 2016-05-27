@@ -153,7 +153,7 @@
                 <div class="site-heading">
                     <h1>Liwei</h1>
                     <!--<hr class="small">-->
-                    <span class="subheading">写写代码，到处走走</span>
+                    <span class="subheading">写写代码，到处走走, 只要跟你在一起...</span>
                 </div>
             </div>
         </div>
@@ -176,36 +176,101 @@
             ">
     			
 <div class="post-preview">
-    <a href="/2016/05/19/Learn-Jekll-Config/">
+    <a href="/2016/05/23/contract-voting/">
         <h2 class="post-title">
-            jeklly配置学习
+            Voting 投票合约
         </h2>
         
         <h3 class="post-subtitle">
-            很早之前就在用，最近又开始整理了！
+            一个how to prevent manipulation.投票系统
         </h3>
         
         <div class="post-content-preview">
-            从网上找到资料整理
-
-借用的博客
-
-遇到的问题
-
-如何在一台电脑上登陆2个github帐号的问题。
-
-如何本地访问的问题。
-
-使用Jekyll版本作为博客模板，仅需如下几步：
+            有关的website
 
 
-  首先Fork或Download一份本项目代码。
-  修改_config.yaml及about.md文件，以变更个人信息。
-  修改_include目录下相关文件，以配置网站统计(analytics.html)，...
+  solidity voting
+
+
+合约内容
+
+游戏规则如下：
+
+
+  The idea is to create one contract per ballot, providing a short name for each option. Then the creator of the contract who serves as chairperson ...
         </div>
     </a>
     <p class="post-meta">
-        Posted by Liwei on May 19, 2016
+        Posted by Liwei on May 23, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/23/contract-onethousand/">
+        <h2 class="post-title">
+            onethousand合约
+        </h2>
+        
+        <h3 class="post-subtitle">
+            一个游戏合约,类似彩票
+        </h3>
+        
+        <div class="post-content-preview">
+            有关的website
+
+
+  github
+
+
+合约内容
+
+
+contract TheLuckyOne {
+    address owner; // owner地址
+    mapping(uint =&gt; address) public tickets; //All tickets, ever, in order
+    mapping(uint =&gt; uint) public...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Liwei on May 23, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/05/23/contract-func/">
+        <h2 class="post-title">
+             contract有关的备忘 
+        </h2>
+        
+        <h3 class="post-subtitle">
+             之前有关的合约语法没有做好记录 
+        </h3>
+        
+        <div class="post-content-preview">
+            有关的website
+
+
+  编辑器
+  solidity官网
+  入门教程
+  很多合约例子
+  处理字符串的合约库
+  字符串与int型之间转换库
+  ethereum alarm clock
+  这个历史合约的界面
+  token成品
+  meat calculator
+  all dapp bin
+  示例代码
+  solidity features
+  solidity 7种类型
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Liwei on May 23, 2016
     </p>
 </div>
 <hr>
@@ -219,6 +284,10 @@
         <a href="/">&larr; Newer Posts</a>
     </li>
     
+    
+    <li class="next">
+        <a href="/page3">Older Posts &rarr;</a>
+    </li>
     
 </ul>
 
@@ -246,9 +315,11 @@
                             
                         
                             
-                                <a href="/tags/#Go" title="Go" rel="2">
+                                <a href="/tags/#Go" title="Go" rel="7">
                                     Go
                                 </a>
+                            
+                        
                             
                         
                     </div>
@@ -263,7 +334,7 @@
                             <img src="/img/me400x400.jpg" />
                         
                         
-                            <p>写写代码，到处走走，世界那么大，我想去看看。希望能平平淡淡无忧无虑到老!</p>
+                            <p>写写代码，和你到处走走，世界那么大，我只想和你在一起到处走走。希望能平平淡淡无忧无虑到老!</p>
                         
                         <!-- SNS Link -->
                         <ul class="list-inline">

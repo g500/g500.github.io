@@ -13,9 +13,9 @@
     <script src="/js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script> 
 
-    <title>平时用的一些命令 - 李伟的博客 | Liwei</title>
+    <title>彩票合约 - 李伟的博客 | Liwei</title>
 
-    <link rel="canonical" href="http://g500.github.io/2016/05/20/Notes-Go-Ethereum/">
+    <link rel="canonical" href="http://g500.github.io/2016/05/24/bet/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -166,15 +166,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#Go" title="Go">Go</a>
                         
                     </div>
-                    <h1>平时用的一些命令</h1>
+                    <h1>彩票合约</h1>
                     
                     
-                    <h2 class="subheading">这个只是一些平时用的一些命令，最好别看，一般人看不懂的！</h2>
+                    <h2 class="subheading">彩票合约相关的一些开发备忘</h2>
                     
-                    <span class="meta">Posted by liwei on May 20, 2016</span>
+                    <span class="meta">Posted by liwei on May 24, 2016</span>
                 </div>
             </div>
         </div>
@@ -192,70 +192,99 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 更新数据库字段</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">update</span><span class="p">({},</span> <span class="p">{</span><span class="na">$set</span><span class="p">:{</span><span class="s1">'walletsum'</span><span class="p">:</span><span class="mi">0</span><span class="p">}},</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
-
-<span class="c1">// 获取块信息</span>
-<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBlock</span><span class="p">(</span><span class="mi">695</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
-
-<span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getTransactionReceipt</span><span class="p">(</span><span class="s2">"0xe5826cf6d5dd5ef6b8166a02dd1943f47aa36866c10cd8ffca2cc044d88eacd4"</span><span class="p">)</span>
-
-<span class="nx">web3</span><span class="p">.</span><span class="nx">fromWei</span><span class="p">(</span><span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">(</span><span class="s2">"0xae069eda080a3a67d91fc7e3e2c793cf162c5c60"</span><span class="p">),</span> <span class="s2">"finney"</span><span class="p">)</span>
-
-</code></pre>
-</div>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>// 查看ipc调用的个数
-lsof -n -P | grep ipc
-
-// find <span class="o">&amp;&amp;</span> grep
-find . -type f -name <span class="s1">'*.sql'</span> -exec grep -i <span class="s1">'texttolookfor'</span> <span class="s1">'{}'</span> +
-
-// mac os run geth
-geth --datadir<span class="o">=</span><span class="s2">"/Users/liweilijie/tmp/data"</span> --genesis ./genesis.json --networkid <span class="s2">"31415929"</span> --port 30302 --rpcport 8102 console
-
-</code></pre>
-</div>
+				<h2 id="section">参考</h2>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>
-var cc <span class="o">=</span> web3.eth.contract<span class="o">([{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[],<span class="s2">"name"</span>:<span class="s2">"getBalance"</span>,<span class="s2">"outputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">""</span>,<span class="s2">"type"</span>:<span class="s2">"uint256"</span><span class="o">}]</span>,<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:true,<span class="s2">"inputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">""</span>,<span class="s2">"type"</span>:<span class="s2">"uint256"</span><span class="o">}]</span>,<span class="s2">"name"</span>:<span class="s2">"bts"</span>,<span class="s2">"outputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">"addr"</span>,<span class="s2">"type"</span>:<span class="s2">"address"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">"choice"</span>,<span class="s2">"type"</span>:<span class="s2">"bytes32"</span><span class="o">}]</span>,<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">"choice"</span>,<span class="s2">"type"</span>:<span class="s2">"bytes32"</span><span class="o">}]</span>,<span class="s2">"name"</span>:<span class="s2">"doBet"</span>,<span class="s2">"outputs"</span>:[],<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[],<span class="s2">"name"</span>:<span class="s2">"kill"</span>,<span class="s2">"outputs"</span>:[],<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[],<span class="s2">"name"</span>:<span class="s2">"getNum"</span>,<span class="s2">"outputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">""</span>,<span class="s2">"type"</span>:<span class="s2">"uint256"</span><span class="o">}]</span>,<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[<span class="o">{</span><span class="s2">"name"</span>:<span class="s2">"luckyone"</span>,<span class="s2">"type"</span>:<span class="s2">"bytes32"</span><span class="o">}]</span>,<span class="s2">"name"</span>:<span class="s2">"drawLotterty"</span>,<span class="s2">"outputs"</span>:[],<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"constant"</span>:false,<span class="s2">"inputs"</span>:[],<span class="s2">"name"</span>:<span class="s2">"adminWithdraw"</span>,<span class="s2">"outputs"</span>:[],<span class="s2">"type"</span>:<span class="s2">"function"</span><span class="o">}</span>,<span class="o">{</span><span class="s2">"inputs"</span>:[],<span class="s2">"type"</span>:<span class="s2">"constructor"</span><span class="o">}])</span>
+<span class="nx">contract</span> <span class="nx">Bet</span> <span class="p">{</span>
+  <span class="nx">address</span> <span class="nx">owner</span><span class="p">;</span> 
 
-txhash <span class="o">=</span> cc.at<span class="o">(</span><span class="s2">"0x317a2a7858e6ac4e3e5a13e2ac0560d3c6622a58"</span><span class="o">)</span>.doBet.sendTransaction<span class="o">(</span>129129,<span class="o">{</span>from:<span class="s1">'0x0cfaad5ee122c8e5819f38ebd2c3a5dbc0905b1a'</span>, gas:300000, value: web3.toWei<span class="o">(</span>2000, <span class="s2">"finney"</span><span class="o">)})</span>
+  <span class="c1">// every vote info</span>
+  <span class="nx">struct</span> <span class="nx">Betinfo</span> <span class="p">{</span>
+    <span class="nx">address</span> <span class="nx">addr</span><span class="p">;</span>
+    <span class="nx">bytes32</span> <span class="nx">choice</span><span class="p">;</span>
+  <span class="p">}</span>
 
-t1 <span class="o">=</span> cc.at<span class="o">(</span><span class="s2">"0x317a2a7858e6ac4e3e5a13e2ac0560d3c6622a58"</span><span class="o">)</span>.getBalance.sendTransaction<span class="o">({</span>from:<span class="s1">'0x0cfaad5ee122c8e5819f38ebd2c3a5dbc0905b1a'</span><span class="o">})</span>
+  <span class="c1">// all voted info</span>
+  <span class="nx">Betinfo</span><span class="p">[]</span> <span class="kr">public</span> <span class="nx">bts</span><span class="p">;</span>
+  <span class="nx">uint</span> <span class="kr">public</span> <span class="nx">length</span><span class="p">;</span>
 
-</code></pre>
-</div>
+  <span class="kd">function</span> <span class="nx">Bet</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">owner</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">;</span>
+  <span class="p">}</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>eth.sendTransaction({from: eth.accounts[0], value: web3.toWei(1, 'ether'), to: '0x446D1696a5527018453cdA3d67aa4C2cd189b9f6', gas: 300000});
+  <span class="kd">function</span> <span class="nx">kill</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span> <span class="o">==</span> <span class="nx">owner</span><span class="p">)</span>
+      <span class="nx">suicide</span><span class="p">(</span><span class="nx">owner</span><span class="p">);</span>
+  <span class="p">}</span>
 
-</code></pre>
-</div>
+  <span class="kd">function</span> <span class="nx">getBalance</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">constant</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">balance</span><span class="p">;</span>
+  <span class="p">}</span>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//JSON functions
-function setNickname(string name) {
-addNewUser(msg.sender);
+  <span class="kd">function</span> <span class="nx">getNums</span><span class="p">()</span> <span class="kr">public</span> <span class="nx">constant</span> <span class="nx">returns</span> <span class="p">(</span><span class="nx">uint</span><span class="p">)</span>  <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">bts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
 
-if (bytes(name).length &gt;= 2 &amp;&amp; bytes(name).length &lt;= 16)
-users[msg.sender].nickname = name;
+  <span class="kd">function</span> <span class="nx">adminWithdraw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">owner</span> <span class="o">!=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">balance</span><span class="p">);</span>
+  <span class="p">}</span>
 
-}    
+  <span class="kd">function</span> <span class="nx">doBet</span><span class="p">(</span><span class="nx">bytes32</span> <span class="nx">choice</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+    <span class="nx">bts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Betinfo</span><span class="p">({</span><span class="na">addr</span><span class="p">:</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">,</span> <span class="na">choice</span><span class="p">:</span><span class="nx">choice</span><span class="p">}));</span>
+    <span class="nx">length</span> <span class="o">=</span> <span class="nx">bts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
 
-function currentBalance() constant returns (uint pitBalance, string info) {
-        pitBalance = balance / 1 finney;
-        info = 'The balance of the pit in Finneys (contract balance minus fees).';
-}
+  <span class="kd">function</span> <span class="nx">drawLotterty</span><span class="p">(</span><span class="nx">bytes32</span> <span class="nx">luckyone</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">owner</span> <span class="o">!=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">sender</span><span class="p">)</span>
+      <span class="k">throw</span><span class="p">;</span>
 
-function heroOfThePit() constant returns (address theHero, string nickname, uint peopleSaved, string info) {
-    theHero = hero;  
-    nickname = users[theHero].nickname;
-    peopleSaved = rescueRecord;
-    info = 'The current rescue record holder. All hail!';
-}
+    <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">uint256</span> <span class="nx">permoney</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">bts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">bts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">choice</span> <span class="o">==</span> <span class="nx">luckyone</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">permoney</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">balance</span> <span class="o">/</span> <span class="nx">count</span><span class="p">;</span>
+
+    <span class="c1">// send the money</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">bts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">bts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">choice</span> <span class="o">==</span> <span class="nx">luckyone</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">addr</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">permoney</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
+    <span class="k">delete</span> <span class="nx">bts</span><span class="p">;</span>
+    
+    <span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
 
 </code></pre>
 </div>
+
+<ul>
+  <li>push();</li>
+  <li>delete bts;</li>
+  <li>constant 修饰符</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="x">
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"v.id:"</span><span class="p">,</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Id_</span><span class="p">)</span><span class="x"> </span><span class="c">// v.id: ObjectIdHex("574418a5e046861c33000001")</span><span class="x">
+</span><span class="n">hex</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">v</span><span class="o">.</span><span class="n">Id_</span><span class="o">.</span><span class="n">Hex</span><span class="p">()</span><span class="x">
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"hex:"</span><span class="p">,</span><span class="x"> </span><span class="n">hex</span><span class="p">)</span><span class="x"> </span><span class="c">// hex: 574418a5e046861c33000001</span><span class="x">
+</span><span class="n">objhex</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">bson</span><span class="o">.</span><span class="n">ObjectIdHex</span><span class="p">(</span><span class="n">hex</span><span class="p">)</span><span class="x">
+</span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"objhex:"</span><span class="p">,</span><span class="x"> </span><span class="n">objhex</span><span class="p">)</span><span class="x"> </span><span class="c">// objhex: ObjectIdHex("574418a5e046861c33000001")</span><span class="x">
+
+</span></code></pre>
+</div>
+
 
 
                 <hr>
@@ -266,17 +295,17 @@ function heroOfThePit() constant returns (address theHero, string nickname, uint
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2016/05/19/Learn-Jekll-Config/" data-toggle="tooltip" data-placement="top" title="jeklly配置学习">
+                        <a href="/2016/05/23/contract-voting/" data-toggle="tooltip" data-placement="top" title="Voting 投票合约">
                         Previous<br>
-                        <span>jeklly配置学习</span>
+                        <span>Voting 投票合约</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2016/05/21/Go-Mgo-Reg/" data-toggle="tooltip" data-placement="top" title=" Go在Mgo里面模糊查询 ">
+                        <a href="/2016/05/24/contract-auction/" data-toggle="tooltip" data-placement="top" title="Auction 拍卖合约">
                         Next<br>
-                        <span> Go在Mgo里面模糊查询 </span>
+                        <span>Auction 拍卖合约</span>
                         </a>
                     </li>
                     

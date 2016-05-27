@@ -69,7 +69,7 @@ kramdown:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，到处走走，世界那么大，我想去看看。希望能平平淡淡无忧无虑到老!"
+sidebar-about-description: "写写代码，和你到处走走，世界那么大，我只想和你在一起到处走走。希望能平平淡淡无忧无虑到老!"
 sidebar-avatar: /img/me400x400.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
